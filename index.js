@@ -16,20 +16,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const card = document.createElement('div');
         card.classList.add('card');
 
-        // const image = document.createElement('img');
-        // image.src = recipe.image;
-        // card.appendChild(image);
+        const image = document.createElement('img');
+        image.src = recipe.image;
+        card.appendChild(image);
 
         const name = document.createElement('h2');
         name.textContent = recipe.name;
         card.appendChild(name);
 
         const ingredients = document.createElement('p');
-        ingredients.textContent = recipe.ingredients;
+        ingredients.textContent = '<strong>Ingredients:</strong> ' + recipe.ingredients;
         card.appendChild(ingredients);
 
         const instructions = document.createElement('p');
-        instructions.textContent = 'Instructions: ' + recipe.instructions;
+        instructions.textContent = '<Instructions: ' + recipe.instructions;
         card.appendChild(instructions);
 
         return card;
