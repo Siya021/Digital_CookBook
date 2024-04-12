@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
         card.appendChild(name);
 
         const ingredients = document.createElement('p');
-        ingredients.textContent = `<strong>Ingredients:</strong> ` + recipe.ingredients;
+        ingredients.innerHTML = `<h5>Ingredients:</h5> ${recipe.ingredients}`;
         card.appendChild(ingredients);
-
+        
         const instructions = document.createElement('p');
-        instructions.textContent = `<strong>Instructions:</strong>`+ recipe.instructions;
+        instructions.innerHTML = `<h5>Instructions:</h5> ${recipe.instructions}`;
         card.appendChild(instructions);
 
         return card;
