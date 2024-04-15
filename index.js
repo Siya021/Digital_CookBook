@@ -32,33 +32,49 @@ function displayRecipes(recipes) {
     
       const readMoreBtn = document.createElement('button');
       readMoreBtn.textContent = 'Read More';
+      card.appendChild(readMoreBtn);
+      
+      const modal = document.getElementById('myModal');
+      const modalContent = document.getElementById('modal-content');
+      modalContent.style.backgroundColor = '#fefefe';
+      modalContent.style.margin = '15% auto';
+      modalContent.style.padding = '20px';
+      modalContent.style.border = '1px solid #888';
+      modalContent.style.width = '80%';
+      modalContent.style.padding = '20px';
+      const closeBtn = document.getElementsByClassName('close')[0];
+      
+      
       readMoreBtn.addEventListener('click', () => {
         showMoreDetails(recipe);
+        modal.style.display = 'block'; 
       });
-      card.appendChild(readMoreBtn);
-    
-    // function showMoreDetails(recipe) {
-    // const card = document.getElementById(`recipe-${recipe.id}`);
-    // const detailsSection = card.querySelector('.details-section');
-    // detailsSection.classList.toggle('expanded');
-    
-    // const readMoreBtn = card.querySelector('.read-more-btn');
-    // if (detailsSection.classList.contains('expanded')) {
-    //     readMoreBtn.textContent = 'Read Less';
-    // } else {
-    //     readMoreBtn.textContent = 'Read More';
+      
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+      
+      window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+      
+      function showMoreDetails(recipe) {
+        modalContent.innerHTML = `Details for <strong>${recipe.name}</strong><br>
+          <strong>Ingredients:</strong> ${recipe.ingredients}<br>
+          <strong>Instructions:</strong> ${recipe.instructions}<br>
+          <strong>Serving:</strong> ${recipe.servings}<br>
+          <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
+      }
+      
 
-      recipesContainer.appendChild(card);
+    
+       recipesContainer.appendChild(card);
     })};
 
 
-function showMoreDetails(recipe) {
-    alert(`Details for ${recipe.name}:
-    Ingredients: ${recipe.ingredients}
-    Instructions: ${recipe.instructions}
-    Serving: ${recipe.servings}
-    Calories per Serving: ${recipe.caloriesPerServing}`);
-}
+
 
 function getStars(rating) {
   const roundedRating = Math.round(rating); 
