@@ -105,3 +105,24 @@ padding: 10px;
         text-decoration: none;
         cursor: pointer;
       }
+#myVideo {
+  /* position: fixed; */
+  right: 0;
+  bottom: 0;
+  max-width: 100%;
+  max-height: 100vh;
+}
+
+.row{
+    align-items: center;
+    width: 100%;
+    border-right: brown solid 2px;
+    padding: 10px;
+}
+
+#col{
+   border-right:solid rgb(139, 88, 21) 1px;
+   height: 100px;
+   padding: 20px;
+   font-family: 'Poppins', sans-serif;
+}
