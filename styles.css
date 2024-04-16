@@ -20,11 +20,7 @@ nav a {
     color: rgb(202, 137, 16);
     text-decoration: none;
     margin: 0 20px;
-    
-    
-
 }
-
 
 .container {
 padding: 20px;
@@ -86,8 +82,7 @@ font-size: 18px;
 padding: 10px;
 }
 
-
-    .modal {
+.modal {
         display: none; 
         position: fixed; 
         z-index: 1; 
