@@ -33,8 +33,6 @@ h2{
     padding: 20px;
 }
 
-
-
 .heading {
 text-align: center;
 margin-bottom: 20px;
@@ -81,60 +79,3 @@ font-size: 18px;
 .recipe-card p {
 padding: 10px;
 }
-
-.modal {
-        display: none; 
-        position: fixed; 
-        z-index: 1; 
-        left: 0;
-        top: 0;
-        width: 100%; 
-        height: 100%; 
-        overflow: auto; 
-        background-color: rgba(0,0,0,0.4); 
-      }
-  
-      .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto; 
-        padding: 20px;
-        border: 1px solid #888;
-        width: 60%;
-        height:auto;
-      }
-
-      .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
-  
-      .close:hover,
-      .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-      }
-#myVideo {
-  /* position: fixed; */
-  right: 0;
-  bottom: 0;
-  max-width: 100%;
-  max-height: 100vh;
-}
-
-.row{
-    align-items: center;
-    width: 100%;
-    border-right: brown solid 2px;
-    padding: 10px;
-}
-
-#col{
-   border-right:solid rgb(139, 88, 21) 1px;
-   height: 100px;
-   padding: 20px;
-   font-family: 'Poppins', sans-serif;
-}
-

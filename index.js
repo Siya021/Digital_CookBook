@@ -69,7 +69,6 @@ function displayRecipes(recipes) {
       }
       
 
-    
        recipesContainer.appendChild(card);
     })};
 
