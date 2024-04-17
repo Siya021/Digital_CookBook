@@ -67,6 +67,8 @@ function displayRecipes(recipes) {
       showMoreDetails(recipe, modalContent);
 
        recipesContainer.appendChild(card);
+
+       
 })};
 
 function showMoreDetails(recipe, modalContent) {
@@ -82,3 +84,20 @@ function getStars(rating) {
   const stars =  '⭐'.repeat(roundedRating);
   return stars;
 }
+
+const search = document.querySelector('.searchInput');
+const output = document.querySelector('.output');
+window.addEventListener("DOMContentLoaded", displayRecipes(recipes) )
+
+function filterRecipes({ prepTimeMax, cuisine, servingMin }) {
+  return recipes.filter(recipe => {
+      const meetsPrepTime = !prepTimeMax || recipe.prepTimeMinutes <= prepTimeMax;
+      const meetsCuisine = !cuisine || recipe.cuisine.toLowerCase() === cuisine.toLowerCase();
+      const meetsServing = !servingMin || recipe.servings >= servingMin;
+      return meetsPrepTime && meetsCuisine && meetsServing;
+  });
+}
+
+// Example usage:
+const filteredRecipes = filterRecipes({ prepTimeMax: 20, cuisine: "Italian", servingMin: 3 });
+console.log(filteredRecipes);
