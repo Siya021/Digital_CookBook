@@ -44,7 +44,6 @@ function displayRecipes(recipes) {
       modalContent.style.padding = '20px';
       const closeBtn = document.getElementsByClassName('close')[0];
       
-      
       readMoreBtn.addEventListener('click', () => {
         showMoreDetails(recipe);
         modal.style.display = 'block'; 
@@ -68,15 +67,14 @@ function displayRecipes(recipes) {
           <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
       }
       
-
        recipesContainer.appendChild(card);
-    })};
+})};
 
 
 
 
 function getStars(rating) {
   const roundedRating = Math.round(rating); 
-  const stars =   '⭐'.repeat(roundedRating);
+  const stars =  '⭐'.repeat(roundedRating);
   return stars;
 }
