@@ -1,5 +1,6 @@
+const url = 'https://dummyjson.com/recipes' ;
 let allRecipes = [];
-fetch('https://dummyjson.com/recipes')
+fetch(url)
   .then(response => response.json())
   .then(data => {
     allRecipes = data.recipes;
@@ -59,19 +60,18 @@ function displayRecipes(recipes) {
         }
       });
       
-      function showMoreDetails(recipe) {
-        modalContent.innerHTML = `Details for <strong>${recipe.name}</strong><br>
-          <strong>Ingredients:</strong> ${recipe.ingredients}<br>
-          <strong>Instructions:</strong> ${recipe.instructions}<br>
-          <strong>Serving:</strong> ${recipe.servings}<br>
-          <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
-      }
-      
        recipesContainer.appendChild(card);
+       
+       showMoreDetails(recipe);
 })};
 
-
-
+function showMoreDetails(recipe) {
+  modalContent.innerHTML = `Details for <strong>${recipe.name}</strong><br>
+    <strong>Ingredients:</strong> ${recipe.ingredients}<br>
+    <strong>Instructions:</strong> ${recipe.instructions}<br>
+    <strong>Serving:</strong> ${recipe.servings}<br>
+    <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
+}
 
 function getStars(rating) {
   const roundedRating = Math.round(rating); 
