@@ -1,5 +1,6 @@
+const url = 'https://dummyjson.com/recipes' ;
 let allRecipes = [];
-fetch('https://dummyjson.com/recipes')
+fetch(url)
   .then(response => response.json())
   .then(data => {
     allRecipes = data.recipes;
@@ -35,16 +36,19 @@ function displayRecipes(recipes) {
       card.appendChild(readMoreBtn);
       
       const modal = document.getElementById('myModal');
+
       const modalContent = document.getElementById('modal-content');
+
       modalContent.style.backgroundColor = '#fefefe';
       modalContent.style.margin = '15% auto';
       modalContent.style.padding = '20px';
       modalContent.style.border = '1px solid #888';
       modalContent.style.width = '80%';
       modalContent.style.padding = '20px';
+
       const closeBtn = document.getElementsByClassName('close')[0];
       
-      
+
       readMoreBtn.addEventListener('click', () => {
         showMoreDetails(recipe);
         modal.style.display = 'block'; 
@@ -59,24 +63,44 @@ function displayRecipes(recipes) {
           modal.style.display = 'none';
         }
       });
-      
-      function showMoreDetails(recipe) {
-        modalContent.innerHTML = `Details for <strong>${recipe.name}</strong><br>
-          <strong>Ingredients:</strong> ${recipe.ingredients}<br>
-          <strong>Instructions:</strong> ${recipe.instructions}<br>
-          <strong>Serving:</strong> ${recipe.servings}<br>
-          <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
-      }
-      
+
+      showMoreDetails(recipe, modalContent);
 
        recipesContainer.appendChild(card);
-    })};
 
+       
 
+       
+})};
 
+function showMoreDetails(recipe, modalContent) {
+  modalContent.innerHTML = `Details for <strong>${recipe.name}</strong><br>
+    <strong>Ingredients:</strong> ${recipe.ingredients}<br>
+    <strong>Instructions:</strong> ${recipe.instructions}<br>
+    <strong>Serving:</strong> ${recipe.servings}<br>
+    <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
+}
 
 function getStars(rating) {
   const roundedRating = Math.round(rating); 
-  const stars =   '⭐'.repeat(roundedRating);
+  const stars =  '⭐'.repeat(roundedRating);
   return stars;
 }
+
+const searchInput = document.querySelector('.searchInput');
+searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value.toLowerCase();
+  const filteredRecipes = allRecipes.filter(recipe =>
+    recipe.name.toLowerCase().includes(searchTerm)
+  );
+  displayRecipes(filteredRecipes);
+});
+
+// function filterRecipes({ cuisine }) {
+//   return recipes.filter(recipe => {
+//       return recipe.cuisine.toLowerCase() === cuisine.toLowerCase();
+//   });
+// }
+
+// const filteredRecipes = filterRecipes({ cuisine: "italian" }); // Change "italian" to the desired cuisine
+// console.log(filteredRecipes);
