@@ -1,3 +1,9 @@
+**{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 nav {
     background-color:brown;
     color: rgb(202, 137, 16);
