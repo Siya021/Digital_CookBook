@@ -69,6 +69,8 @@ function displayRecipes(recipes) {
        recipesContainer.appendChild(card);
 
        
+
+       
 })};
 
 function showMoreDetails(recipe, modalContent) {
@@ -85,19 +87,20 @@ function getStars(rating) {
   return stars;
 }
 
-const search = document.querySelector('.searchInput');
-const output = document.querySelector('.output');
-window.addEventListener("DOMContentLoaded", displayRecipes(recipes) )
+const searchInput = document.querySelector('.searchInput');
+searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value.toLowerCase();
+  const filteredRecipes = allRecipes.filter(recipe =>
+    recipe.name.toLowerCase().includes(searchTerm)
+  );
+  displayRecipes(filteredRecipes);
+});
 
-function filterRecipes({ prepTimeMax, cuisine, servingMin }) {
-  return recipes.filter(recipe => {
-      const meetsPrepTime = !prepTimeMax || recipe.prepTimeMinutes <= prepTimeMax;
-      const meetsCuisine = !cuisine || recipe.cuisine.toLowerCase() === cuisine.toLowerCase();
-      const meetsServing = !servingMin || recipe.servings >= servingMin;
-      return meetsPrepTime && meetsCuisine && meetsServing;
-  });
-}
+// function filterRecipes({ cuisine }) {
+//   return recipes.filter(recipe => {
+//       return recipe.cuisine.toLowerCase() === cuisine.toLowerCase();
+//   });
+// }
 
-// Example usage:
-const filteredRecipes = filterRecipes({ prepTimeMax: 20, cuisine: "Italian", servingMin: 3 });
-console.log(filteredRecipes);
+// const filteredRecipes = filterRecipes({ cuisine: "italian" }); // Change "italian" to the desired cuisine
+// console.log(filteredRecipes);
