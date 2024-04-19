@@ -87,7 +87,7 @@ function getStars(rating) {
   return stars;
 }
 
-const searchInput = document.querySelector('.searchInput');
+const searchInput = document.querySelector('#searchInput');
 searchInput.addEventListener('input', () => {
   const searchTerm = searchInput.value.toLowerCase();
   const filteredRecipes = allRecipes.filter(recipe =>
@@ -104,3 +104,7 @@ searchInput.addEventListener('input', () => {
 
 // const filteredRecipes = filterRecipes({ cuisine: "italian" }); // Change "italian" to the desired cuisine
 // console.log(filteredRecipes);
+
+
+
+// Fetch data from the API
