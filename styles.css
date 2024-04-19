@@ -1,4 +1,4 @@
-**{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,7 +9,6 @@ nav {
     color: rgb(202, 137, 16);
     padding: 10px 20px;
     text-align: center;
-    margin: -20px;
 }
 
 .logo{
@@ -22,10 +21,17 @@ align-items: center;
 }
 
 
-nav a {
-    color: rgb(202, 137, 16);
+nav li .nav-link{
+    color: white;
+    font-size: bold;
     text-decoration: none;
-    margin: 0 20px;
+    /* margin: 0 20px; */
+}
+
+nav ul {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
 }
 
 .container {
@@ -42,6 +48,26 @@ h2{
 .heading {
 text-align: center;
 margin-bottom: 20px;
+}
+
+.btn-container {
+  margin-top: 20px;
+}
+.btn-group {
+  display: flex;
+  justify-content: center; /* Center align content horizontally */
+}
+.btn-check {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+.btn {
+  cursor: pointer;
+}
+.btn-outline-warning {
+  color: #ffc107;
+  border-color: #ffc107;
 }
 
 button{
@@ -86,41 +112,75 @@ font-size: 18px;
 padding: 10px;
 }
 
-/* Style for the modal */
-#myModal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 9999; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
+#modal-content {
+background-color: #fefefe;
+margin: 10% auto;
+padding: 20px;
+border: 1px solid #888;
+width: 50%;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+}
+
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+.banner{
+/* background-image: url('/images/ca658a1987ebce01fd99f0a3db713120.jpg'); */
+background-repeat: no-repeat;
+/* background-position: cover; */
+background-size: cover;
+margin-top: px;
+border: #ca8910 solid 3px;
+height: 400px;
+width: 100%;
+padding: 30px;
+gap: 50px;
+}
+
+.search-container{
+    margin-top: 50px;
+}
+#saved {
+    border: black solid 3px;
+    height: 60px;
+    margin-top: 50px;
+}
+
+.slide {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px; /* Adjust the width as needed */
+    margin: 0 auto;
   }
-  
-  /* Style for the modal content */
-  #modal-content {
-    background-color: #fefefe;
-    margin: 10% auto; /* 10% from the top and centered */
+
+  .item {
+    flex: 0 0 auto;
+    width: 100%;
+    transition: transform 0.5s ease;
+  }
+
+  .content {
+    text-align: center;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* 80% width */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Box shadow */
+    color: white;
   }
-  
-  /* Close button style */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
+
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
     cursor: pointer;
   }
-  

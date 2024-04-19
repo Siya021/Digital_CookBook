@@ -7,79 +7,78 @@ fetch(url)
     displayRecipes(allRecipes);
   });
 
-function displayRecipes(recipes) {
+  function displayRecipes(recipes) {
     const recipesContainer = document.getElementById('recipes');
     recipesContainer.innerHTML = '';
 
     recipes.forEach(recipe => {
-      const card = document.createElement('div');
-      card.classList.add('recipe-card');
+        const card = document.createElement('div');
+        card.classList.add('recipe-card');
 
-      const image = document.createElement('img');
-      image.src = recipe.image;
-      card.appendChild(image);
+        const image = document.createElement('img');
+        image.src = recipe.image;
+        card.appendChild(image);
 
-      const name = document.createElement('h2');
-      name.textContent = recipe.name;
-      card.appendChild(name);
+        const name = document.createElement('h2');
+        name.textContent = recipe.name;
+        card.appendChild(name);
 
-      const difficulty = document.createElement('p');
-      difficulty.textContent = `Difficulty: ${recipe.difficulty}`;
-      card.appendChild(difficulty);
+        const difficulty = document.createElement('p');
+        difficulty.textContent = `Difficulty: ${recipe.difficulty}`;
+        card.appendChild(difficulty);
 
-      const ratingStars = document.createElement('p');
-      ratingStars.textContent = `Rating: ${getStars(recipe.rating)}`;
-      card.appendChild(ratingStars);
-    
-      const readMoreBtn = document.createElement('button');
-      readMoreBtn.textContent = 'Read More';
-      card.appendChild(readMoreBtn);
-      
-      const modal = document.getElementById('myModal');
+        const ratingStars = document.createElement('p');
+        ratingStars.textContent = `Rating: ${getStars(recipe.rating)}`;
+        card.appendChild(ratingStars);
 
-      const modalContent = document.getElementById('modal-content');
+        const readMoreBtn = document.createElement('button');
+        readMoreBtn.textContent = 'Read More';
+        readMoreBtn.addEventListener('click', () => {
+            openModal(recipe);
+        });
+        card.appendChild(readMoreBtn);
 
-      modalContent.style.backgroundColor = '#fefefe';
-      modalContent.style.margin = '15% auto';
-      modalContent.style.padding = '20px';
-      modalContent.style.border = '1px solid #888';
-      modalContent.style.width = '80%';
-      modalContent.style.padding = '20px';
+        recipesContainer.appendChild(card);
+    });
+}
 
-      const closeBtn = document.getElementsByClassName('close')[0];
-      
+function openModal(recipe) {
+    const modal = document.createElement("div");
+    modal.id = "myModal";
+    modal.className = "modal";
+    modal.style.display = "block";
 
-      readMoreBtn.addEventListener('click', () => {
-        showMoreDetails(recipe);
-        modal.style.display = 'block'; 
-      });
-      
-      closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-      });
-      
-      window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-          modal.style.display = 'none';
-        }
-      });
+    const modalContainer = document.createElement("div");
+    modalContainer.className = "modal-content";
 
-      showMoreDetails(recipe, modalContent);
+    const closeBtn = document.createElement("span");
+    closeBtn.className = "close";
+    closeBtn.innerHTML = "&times;";
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+    modalContainer.appendChild(closeBtn);
 
-       recipesContainer.appendChild(card);
-
-       
-
-       
-})};
-
-function showMoreDetails(recipe, modalContent) {
-  modalContent.innerHTML = `Details for <strong>${recipe.name}</strong><br>
+    const modalContentDiv = document.createElement("div");
+    modalContentDiv.id = "modal-content";
+    modalContentDiv.innerHTML = `Details for <strong>${recipe.name}</strong><br>
     <strong>Ingredients:</strong> ${recipe.ingredients}<br>
     <strong>Instructions:</strong> ${recipe.instructions}<br>
     <strong>Serving:</strong> ${recipe.servings}<br>
     <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
+    modalContainer.appendChild(modalContentDiv);
+
+    modal.appendChild(modalContainer);
+    document.body.appendChild(modal);
 }
+
+// function showMoreDetails(recipe, modalContent) {
+//   modalContent.innerHTML = `Details for <strong>${recipe.name}</strong><br>
+//     <strong>Ingredients:</strong> ${recipe.ingredients}<br>
+//     <strong>Instructions:</strong> ${recipe.instructions}<br>
+//     <strong>Serving:</strong> ${recipe.servings}<br>
+//     <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
+// }
 
 function getStars(rating) {
   const roundedRating = Math.round(rating); 
@@ -87,7 +86,7 @@ function getStars(rating) {
   return stars;
 }
 
-const searchInput = document.querySelector('.searchInput');
+const searchInput = document.querySelector('#searchInput');
 searchInput.addEventListener('input', () => {
   const searchTerm = searchInput.value.toLowerCase();
   const filteredRecipes = allRecipes.filter(recipe =>
@@ -104,3 +103,4 @@ searchInput.addEventListener('input', () => {
 
 // const filteredRecipes = filterRecipes({ cuisine: "italian" }); // Change "italian" to the desired cuisine
 // console.log(filteredRecipes);
+
