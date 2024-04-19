@@ -66,11 +66,7 @@ function displayRecipes(recipes) {
 
       showMoreDetails(recipe, modalContent);
 
-       recipesContainer.appendChild(card);
-
-       
-
-       
+       recipesContainer.appendChild(card);   
 })};
 
 function showMoreDetails(recipe, modalContent) {
