@@ -9,7 +9,6 @@ nav {
     color: rgb(202, 137, 16);
     padding: 10px 20px;
     text-align: center;
-    margin: -20px;
 }
 
 .logo{
@@ -22,14 +21,15 @@ align-items: center;
 }
 
 
-nav a {
-    color: rgb(202, 137, 16);
+nav li .nav-link{
+    color: white;
+    font-size: bold;
     text-decoration: none;
     /* margin: 0 20px; */
 }
 
 nav ul {
-  padding-top: 40px;
+  padding-top: 20px;
   padding-bottom: 20px;
 
 }
