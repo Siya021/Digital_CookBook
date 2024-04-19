@@ -137,6 +137,3 @@ searchInput.addEventListener('input', () => {
 // const filteredRecipes = filterRecipes({ cuisine: "italian" }); // Change "italian" to the desired cuisine
 // console.log(filteredRecipes);
 
-
-
-// Fetch data from the API

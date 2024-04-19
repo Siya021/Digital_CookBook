@@ -25,7 +25,13 @@ align-items: center;
 nav a {
     color: rgb(202, 137, 16);
     text-decoration: none;
-    margin: 0 20px;
+    /* margin: 0 20px; */
+}
+
+nav ul {
+  padding-top: 40px;
+  padding-bottom: 20px;
+
 }
 
 .container {
@@ -42,6 +48,26 @@ h2{
 .heading {
 text-align: center;
 margin-bottom: 20px;
+}
+
+.btn-container {
+  margin-top: 20px;
+}
+.btn-group {
+  display: flex;
+  justify-content: center; /* Center align content horizontally */
+}
+.btn-check {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+.btn {
+  cursor: pointer;
+}
+.btn-outline-warning {
+  color: #ffc107;
+  border-color: #ffc107;
 }
 
 button{
@@ -125,7 +151,7 @@ padding: 10px;
   }
   
   .banner{
-    background-image: url('/images/ca658a1987ebce01fd99f0a3db713120.jpg');
+    /* background-image: url('/images/ca658a1987ebce01fd99f0a3db713120.jpg'); */
     background-repeat: no-repeat;
     /* background-position: cover; */
     background-size: cover;
@@ -173,5 +199,3 @@ padding: 10px;
     color: white;
     cursor: pointer;
   }
-
-  
