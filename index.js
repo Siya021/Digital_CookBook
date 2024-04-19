@@ -35,19 +35,21 @@ function displayRecipes(recipes) {
       readMoreBtn.textContent = 'Read More';
       card.appendChild(readMoreBtn);
 
-      var modal = document.createElement("div");
+      
+
+      const modal = document.createElement("div");
       modal.id = "myModal";
       modal.className = "modal";
       modal.style.display = "none";
 
-      var modalContent = document.createElement("div");
+      const modalContent = document.createElement("div");
       modalContent.className = "modal-content";
 
-      var closeBtn = document.createElement("span");
+      const closeBtn = document.createElement("span");
       closeBtn.className = "close";
       closeBtn.innerHTML = "&times;";
 
-      var modalContentDiv = document.createElement("div");
+      const modalContentDiv = document.createElement("div");
       modalContentDiv.id = "modal-content";
 
       modalContent.appendChild(closeBtn);
