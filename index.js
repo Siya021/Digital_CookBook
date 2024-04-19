@@ -34,35 +34,71 @@ function displayRecipes(recipes) {
       const readMoreBtn = document.createElement('button');
       readMoreBtn.textContent = 'Read More';
       card.appendChild(readMoreBtn);
-      
-      const modal = document.getElementById('myModal');
 
-      const modalContent = document.getElementById('modal-content');
+      var modal = document.createElement("div");
+      modal.id = "myModal";
+      modal.className = "modal";
+      modal.style.display = "none";
 
-      modalContent.style.backgroundColor = '#fefefe';
-      modalContent.style.margin = '15% auto';
-      modalContent.style.padding = '20px';
-      modalContent.style.border = '1px solid #888';
-      modalContent.style.width = '80%';
-      modalContent.style.padding = '20px';
+      var modalContent = document.createElement("div");
+      modalContent.className = "modal-content";
 
-      const closeBtn = document.getElementsByClassName('close')[0];
-      
+      var closeBtn = document.createElement("span");
+      closeBtn.className = "close";
+      closeBtn.innerHTML = "&times;";
 
-      readMoreBtn.addEventListener('click', () => {
-        showMoreDetails(recipe);
-        modal.style.display = 'block'; 
+      var modalContentDiv = document.createElement("div");
+      modalContentDiv.id = "modal-content";
+
+      modalContent.appendChild(closeBtn);
+      modalContent.appendChild(modalContentDiv);
+      modal.appendChild(modalContent);
+      document.body.appendChild(modal);
+
+      function openModal() {
+          modal.style.display = "block";
+      }
+
+      function closeModal() {
+          modal.style.display = "none";
+      }
+
+      closeBtn.addEventListener("click", closeModal);
+
+      window.addEventListener("click", function(event) {
+          if (event.target == modal) {
+              closeModal();
+          }
       });
       
-      closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-      });
+      // const modal = document.getElementById('myModal');
+
+      // const modalContent = document.getElementById('modal-content');
+
+      // modalContent.style.backgroundColor = '#fefefe';
+      // modalContent.style.margin = '15% auto';
+      // modalContent.style.padding = '20px';
+      // modalContent.style.border = '1px solid #888';
+      // modalContent.style.width = '80%';
+      // modalContent.style.padding = '20px';
+
+      // const closeBtn = document.getElementsByClassName('close')[0];
       
-      window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-          modal.style.display = 'none';
-        }
-      });
+
+      // readMoreBtn.addEventListener('click', () => {
+      //   showMoreDetails(recipe);
+      //   modal.style.display = 'block'; 
+      // });
+      
+      // closeBtn.addEventListener('click', () => {
+      //   modal.style.display = 'none';
+      // });
+      
+      // window.addEventListener('click', (event) => {
+      //   if (event.target === modal) {
+      //     modal.style.display = 'none';
+      //   }
+      // });
 
       showMoreDetails(recipe, modalContent);
 
