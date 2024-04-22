@@ -1,0 +1,99 @@
+{
+    "recipes":
+    [
+    {"recipeName" : "Classic Margherita Pizza",  
+    "link": "https://www.youtube.com/watch?v=joGKYTGbVw8"},
+
+    {"recipeName" : "Vegetarian Stir-Fry",  
+    "link": "https://www.youtube.com/watch?v=dZYFO2y9BrM"},
+
+    {"recipeName" : "Chocolate Chip Cookies",  
+    "link": "https://www.youtube.com/watch?v=wDO4pRXpRmU"},
+
+    {"recipeName" : "Chicken Alfredo Pasta",  
+    "link": "https://www.youtube.com/watch?v=F7CU0qBdj04"},
+
+    {"recipeName" : "Mango Salsa Chicken",  
+    "link": "https://www.youtube.com/watch?v=35L_MWCms6M"},
+
+    {"recipeName" : "Quinoa Salad with Avocado",  
+    "link": "https://www.youtube.com/watch?v=rIYqwpgNhu0"},
+
+    {"recipeName" : "Tomato Basil Bruschetta",  
+    "link": "https://www.youtube.com/watch?v=Q3xg35pcLyo"},
+
+    {"recipeName" : "Beef and Broccoli Stir-Fry",  
+    "link": "https://www.youtube.com/watch?v=-AEAbF5P1Wo"},
+
+    {"recipeName" : "Caprese Salad",  
+    "link": "https://www.youtube.com/watch?v=9WhwoiPvnq8"},
+
+    {"recipeName" : "Shrimp Scampi Pasta",  
+    "link": "https://www.youtube.com/watch?v=rZprqX6v2I8"},
+
+    {"recipeName" : "Chicken Biryani",  
+    "link": "https://www.youtube.com/watch?v=K9qJQmOeohU"},
+
+    {"recipeName" : "Chicken Karahi",  
+    "link": "https://www.youtube.com/watch?v=XDYNofJ1zI8 "},
+
+    {"recipeName" : "Aloo Keema",  
+    "link": "https://www.youtube.com/watch?v=1poKZySS19c "},
+
+    {"recipeName" : "Chapli Kebabs",  
+    "link": "https://www.youtube.com/watch?v=vFnk2wrxINs"},
+
+    {"recipeName" : "Saag (Spinach) with Makki di Roti",  
+    "link": "https://www.youtube.com/watch?v=tDE2_XKqAlQ"},
+
+    {"recipeName" : "Japanese Ramen Soup",  
+    "link": "https://www.youtube.com/watch?v=9gNIqtmYg5o"},
+
+
+    {"recipeName" : "Moroccan Chickpea Tagine",  
+    "link": "https://www.youtube.com/watch?v=GHsVOzpMLzo"},
+
+    {"recipeName" : "Korean Bibimbap",  
+    "link": "https://www.youtube.com/watch?v=L_sDgKqIXbY"},
+
+    {"recipeName" : "Greek Moussaka",  
+    "link": "https://www.youtube.com/watch?v=Z_GcsR7Q99s"},
+
+    {"recipeName" : "Butter Chicken (Murgh Makhani)",  
+
+    "link": "https://www.youtube.com/watch?v=YDdfX3i5cMo"},
+
+    {"recipeName" : "Thai Green Curry",  
+    "link": "https://www.youtube.com/watch?v=yBn91Il1Fw8"},
+
+    {"recipeName" : "Mango Lassi",  
+    "link": "https://www.youtube.com/watch?v=OebafszIKKc"},
+
+    {"recipeName" : "Italian Tiramisu",  
+    "link": "https://www.youtube.com/watch?v=HykFyrhuyMk "},
+
+    {"recipeName" : "Turkish Kebabs",  
+    "link": "https://www.youtube.com/watch?v=b3-Hp4Al5vk"},
+
+    {"recipeName" : "Blueberry Banana Smoothie",  
+    "link": "https://www.youtube.com/watch?v=clabvwULfMI"},
+
+    {"recipeName" : "Mexican Street Corn (Elote)",  
+    "link": "https://www.youtube.com/watch?v=vsfUpBRm7fI"},
+
+    {"recipeName" : "Russian Borscht",  
+    "link": "https://www.youtube.com/watch?v=pCQTsHdZslk"},
+
+    {"recipeName" : "South Indian Masala Dosa",  
+    "link": "https://www.youtube.com/watch?v=CCab5oh0ZOc"},
+
+    {"recipeName" : "Lebanese Falafel Wrap",  
+    "link": "https://www.youtube.com/watch?v=b2ypY6L1HLY"},
+    
+    {"recipeName" : "Brazilian Caipirinha",  
+    "link": "https://www.youtube.com/watch?v=e2esDaMjNdk"}
+    
+    
+    
+    ]
+}

@@ -1,118 +1,149 @@
-const url = 'https://dummyjson.com/recipes' ;
-let allRecipes = [];
-fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    allRecipes = data.recipes;
-    displayRecipes(allRecipes);
+document.addEventListener("DOMContentLoaded", function () {
+  const recipesUrl = 'https://dummyjson.com/recipes';
+  const youtubeUrl = 'vidz.json';
+  let allRecipes = [];
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || []; // Load favorites from localStorage
+
+  Promise.all([
+      fetch(recipesUrl).then(response => response.json()),
+      fetch(youtubeUrl).then(response => response.json())
+  ])
+      .then(([recipesData, youtubeData]) => {
+          allRecipes = recipesData.recipes.map((recipe, index) => {
+              recipe.youtubeLink = youtubeData.recipes[index].link;
+              return recipe;
+          });
+          displayRecipes(allRecipes);
+      });
+
+  const searchInput = document.getElementById('searchInput');
+
+  searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filteredRecipes = allRecipes.filter(recipe => recipe.name.toLowerCase().includes(searchTerm));
+      displayRecipes(filteredRecipes);
   });
 
   function displayRecipes(recipes) {
-    const recipesContainer = document.getElementById('recipes');
-    recipesContainer.innerHTML = '';
+      const recipesContainer = document.getElementById('recipes');
+      recipesContainer.innerHTML = '';
 
-    recipes.forEach(recipe => {
-        const card = document.createElement('div');
-        card.classList.add('recipe-card');
+      recipes.forEach(recipe => {
+          const card = createRecipeCard(recipe);
+          recipesContainer.appendChild(card);
+      });
+  }
 
-        const image = document.createElement('img');
-        image.src = recipe.image;
-        card.appendChild(image);
+  function createRecipeCard(recipe) {
+      const card = document.createElement('div');
+      card.classList.add('recipe-card');
 
-        const name = document.createElement('h2');
-        name.textContent = recipe.name;
-        card.appendChild(name);
+      const image = document.createElement('img');
+      image.src = recipe.image;
+      card.appendChild(image);
 
-        const difficulty = document.createElement('p');
-        difficulty.textContent = `Difficulty: ${recipe.difficulty}`;
-        card.appendChild(difficulty);
+      const name = document.createElement('h2');
+      name.textContent = recipe.name;
+      card.appendChild(name);
 
-        const ratingStars = document.createElement('p');
-        ratingStars.textContent = `Rating: ${getStars(recipe.rating)}`;
-        card.appendChild(ratingStars);
+      const difficulty = document.createElement('p');
+      difficulty.textContent = `Difficulty: ${recipe.difficulty}`;
+      card.appendChild(difficulty);
+
+      const ratingStars = document.createElement('p');
+      ratingStars.textContent = `Rating: ${getStars(recipe.rating)}`;
+      card.appendChild(ratingStars);
+
+      const readMoreBtn = document.createElement('a');
+      readMoreBtn.innerHTML = '<i class="fas fa-arrow-right-to-bracket fa-1xl" id="modal-icon"></i>'; 
+      readMoreBtn.addEventListener('click', () => {
+          showMoreDetails(recipe);
+      });
+      card.appendChild(readMoreBtn);
 
       
 
-      const modal = document.createElement("div");
-      modal.id = "myModal";
-      modal.className = "modal";
-      modal.style.display = "none";
+      if (!favorites.includes(recipe)) {
+          const favoriteBtn = document.createElement('a');
+          favoriteBtn.innerHTML = '<i class="fas fa-heart fa-1xl" id="modal-icon"></i>';
+          favoriteBtn.addEventListener('click', () => {
+              addToFavorites(recipe);
+          });
+          card.appendChild(favoriteBtn);
+      } else {
+          const deleteBtn = document.createElement('button');
+          deleteBtn.textContent = 'Delete';
+          deleteBtn.addEventListener('click', () => {
+              removeFromFavorites(recipe.name);
+          });
+          card.appendChild(deleteBtn);
+      }
 
-      const modalContent = document.createElement("div");
-      modalContent.className = "modal-content";
+      const youtubeLink = document.createElement('a');
+      youtubeLink.innerHTML = '<i class="fa-regular fa-circle-play fa-1xl" id="modal-icon"></i>';
+      youtubeLink.href = recipe.youtubeLink;
+      youtubeLink.target = '_blank';
+      card.appendChild(youtubeLink);
 
-      const closeBtn = document.createElement("span");
-      closeBtn.className = "close";
-      closeBtn.innerHTML = "&times;";
+      return card;
+  }
 
-      const modalContentDiv = document.createElement("div");
-      modalContentDiv.id = "modal-content";
-        const readMoreBtn = document.createElement('button');
-        readMoreBtn.textContent = 'Read More';
-        readMoreBtn.addEventListener('click', () => {
-            openModal(recipe);
-        });
-        card.appendChild(readMoreBtn);
 
-        recipesContainer.appendChild(card);
-    });
-}
-
-function openModal(recipe) {
-    const modal = document.createElement("div");
-    modal.id = "myModal";
-    modal.className = "modal";
+  function showMoreDetails(recipe) {
+    const modal = document.getElementById('myModal');
+    const modalContent = document.getElementById('modal-content');
     modal.style.display = "block";
+    modalContent.innerHTML = `
+        <div class="modal-dialog modal-fullscreen-xxl-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                <img src="${recipe.image}" class="modal-image">
+                <div class="time-info">
+                <h1 class="modal-title"><strong>${recipe.name}</strong> (${recipe.mealType}) </h1>
+                  <p><i class="fa-regular fa-clock"></i> Prep Time: ${recipe.prepTimeMinutes} min</p>   
+                  <p><i class="fa-solid fa-clock"></i> Cook Time: ${recipe.cookTimeMinutes} min</p>
+                  <p><strong><i class="fa-solid fa-people-group"></i></strong> ${recipe.servings} people/person</p>
+                  
+                  <div class="modal-btns">
+                  <a><i class="fa-regular fa-circle-play fa-2xl"></i></a>
+                  <a><i class="fas fa-heart fa-2xl" ></i></a>
+                  <a><i class="fa-solid fa-volume-high fa-2xl"></i></a>
+                  </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                <p>Tags: ${recipe.tags}</p>
+                    <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+                    <p><strong>Instructions:</strong> ${recipe.instructions}</p>
 
-    const modalContainer = document.createElement("div");
-    modalContainer.className = "modal-content";
-
-    const closeBtn = document.createElement("span");
-    closeBtn.className = "close";
-    closeBtn.innerHTML = "&times;";
-    closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-    modalContainer.appendChild(closeBtn);
-
-    const modalContentDiv = document.createElement("div");
-    modalContentDiv.id = "modal-content";
-    modalContentDiv.innerHTML = `Details for <strong>${recipe.name}</strong><br>
-    <strong>Ingredients:</strong> ${recipe.ingredients}<br>
-    <strong>Instructions:</strong> ${recipe.instructions}<br>
-    <strong>Serving:</strong> ${recipe.servings}<br>
-    <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}
-    <button onclick='mRead("${recipe.ingredients}", "${recipe.instructions}")'>Free hand mode</button>
+                    <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
+                </div>
+                
+            </div>
+        </div>
     `;
-    
-    modalContainer.appendChild(modalContentDiv);
-
-    modal.appendChild(modalContainer);
-    document.body.appendChild(modal);
+    const myModal = new bootstrap.Modal(modal);
+    myModal.show();
 }
 
-// function showMoreDetails(recipe, modalContent) {
-//   modalContent.innerHTML = `Details for <strong>${recipe.name}</strong><br>
-//     <strong>Ingredients:</strong> ${recipe.ingredients}<br>
-//     <strong>Instructions:</strong> ${recipe.instructions}<br>
-//     <strong>Serving:</strong> ${recipe.servings}<br>
-//     <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
-// }
 
-function getStars(rating) {
-  const roundedRating = Math.round(rating); 
-  const stars =  '⭐'.repeat(roundedRating);
-  return stars;
-}
+  // function showMoreDetails(recipe) {
+  //     const modal = document.getElementById('myModal');
+  //     const modalContent = document.getElementById('modal-content');
+  //     modal.style.display = "block";
+  //     modalContent.innerHTML = `
+  //         <h2>${recipe.name}</h2>
+  //         <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+  //         <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+  //         <p><strong>Serving:</strong> ${recipe.servings}</p>
+  //         <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
+  //     `;
+  // }
 
-const searchInput = document.querySelector('#searchInput');
-searchInput.addEventListener('input', () => {
-  const searchTerm = searchInput.value.toLowerCase();
-  const filteredRecipes = allRecipes.filter(recipe =>
-    recipe.name.toLowerCase().includes(searchTerm)
-  );
-  displayRecipes(filteredRecipes);
-});
+  const closeModalBtn = document.getElementsByClassName('close')[0];
+  const modal = document.getElementById('myModal');
 
 function mRead(ingredients, instructions){
 
@@ -187,7 +218,48 @@ const synth = speechSynthesis;
 //       return recipe.cuisine.toLowerCase() === cuisine.toLowerCase();
 //   });
 // }
+  closeModalBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+  });
 
-// const filteredRecipes = filterRecipes({ cuisine: "italian" }); // Change "italian" to the desired cuisine
-// console.log(filteredRecipes);
+  window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+          modal.style.display = 'none';
+      }
+  });
 
+  function getStars(rating) {
+      const roundedRating = Math.round(rating);
+      const stars = '🔥'.repeat(roundedRating);
+      return stars;
+  }
+
+
+  function addToFavorites(recipe) {
+      if (!favorites.includes(recipe)){
+      favorites.push(recipe);
+      updateFavoritesNav();
+      saveFavoritesToLocalStorage();
+  }}
+
+  function removeFromFavorites(recipeName) {
+      favorites = favorites.filter(recipe => recipe.name !== recipeName);
+      updateFavoritesNav();
+      saveFavoritesToLocalStorage();
+      displayRecipes(favorites);
+  }
+
+  function updateFavoritesNav() {
+      const favoritesNav = document.getElementById('favorites');
+      favoritesNav.textContent = `Favorites (${favorites.length})`;
+  }
+
+  function saveFavoritesToLocalStorage() {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
+
+  const favoritesNav = document.getElementById('favorites');
+  favoritesNav.addEventListener('click', () => {
+      displayRecipes(favorites);
+  });
+});
