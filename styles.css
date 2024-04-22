@@ -101,7 +101,7 @@ nav ul li a {
   color: rgb(48, 45, 45);
 }
 
-.modal {
+/* .modal {
   display: none;
   position: fixed;
   z-index: 9999;
@@ -111,15 +111,20 @@ nav ul li a {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   overflow: auto;
-}
+} */
 
-.modal-content {
+/* .modal-content {
   background-color: white;
   margin: 10% auto;
   padding: 20px;
   border-radius: 5px;
   max-width: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+} */
+
+.modal-image {
+  height: 300px;
+  width: 300px;
 }
 
 .close {
@@ -137,7 +142,7 @@ nav ul li a {
 button{
   border-radius: 20px;
   color: #ffc107;
-  background-color: brown;
+  /* background-color: brown; */
   margin-left: 30px;
   margin-top: 10px;
   justify-content: center;
@@ -148,4 +153,24 @@ button{
 
 a{
   padding: 10px;
+}
+
+.modal-title {
+  margin-bottom: 20px;
+}
+.modal-header {
+ display: flex;
+ gap: 60px;
+ padding: 20px;
+ align-items: flex-start;
+}
+
+.time-info {
+  margin: 10px;
+  display: flex-start;
+  gap: 20px;
+}
+
+.modal-btns {
+ margin-top: 30px;
 }
