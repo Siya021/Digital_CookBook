@@ -23,32 +23,43 @@
                 <input id="searchInput" type="search" placeholder="Search" aria-label="Search">
             </form>
         </div>
+      </div>
     </nav>
     <!-- End of Navbar -->
 
     <section class="landing-section">
         <!-- Banner start-->
         <div class="banner">
-            <div class="container">
-                <h1 class="heading">Welcome to food deli</h1>
-                <div class="btn-group">
-                    <label>
-                        <input type="radio" name="mealType" value="breakfast" checked>
-                        Breakfast
-                    </label>
-                    <label>
-                        <input type="radio" name="mealType" value="lunch">
-                        Lunch
-                    </label>
-                    <label>
-                        <input type="radio" name="mealType" value="dinner">
-                        Dinner
-                    </label>
-                </div>
-            </div>
-        </div>
-        <!-- Banner End -->
-    </section>
+          <div class="container">
+        <h1  class="heading">Welcome to food deli</h1>
+        
+    </div>
+
+
+  <section class="buttons-container">
+
+    <div class="btn-container">
+      <div class="btn-group " role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+      <label class="btn btn-outline-warning" for="btnradio1">Breakfast</label>
+    
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <label class="btn btn-outline-warning" for="btnradio2">Lunch</label>
+    
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+      <label class="btn btn-outline-warning" for="btnradio3">Dinner</label>
+    </div>
+    </div>
+
+
+  </section>
+  
+  
+
+
+</div>
+<!-- Banner End -->
+</section>
 
     <div id="recipes"></div>
 
