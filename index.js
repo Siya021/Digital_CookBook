@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   
                   <div class="modal-btns">
                   <a><i class="fa-regular fa-circle-play fa-2xl"></i></a>
-                  <a><i class="fas fa-heart fa-2xl" ></i></a>
+                  <a><i class="fas fa-heart fa-2xl"></i></a>
                   <a><i class="fa-solid fa-volume-high fa-2xl"></i></a>
                   </div>
                 </div>
@@ -145,8 +145,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeModalBtn = document.getElementsByClassName('close')[0];
   const modal = document.getElementById('myModal');
 
-function mRead(ingredients, instructions){
+function mRead(ingredients){
 
+  // Create New Speech Synthesis Utterance 
 let utterance = new SpeechSynthesisUtterance(`Before we get you started 
 lets make sure you have the following ingredients... ${ingredients}`);
 utterance.rate = 0.9
@@ -154,7 +155,7 @@ utterance.rate = 0.9
 const synth = speechSynthesis;
  
  let voices = synth.getVoices()
-    console.log(voices.length)
+ 
      utterance.voice = voices[0];
     
     utterance.addEventListener("end", (event) => {
