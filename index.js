@@ -81,7 +81,10 @@ function openModal(recipe) {
     <strong>Ingredients:</strong> ${recipe.ingredients}<br>
     <strong>Instructions:</strong> ${recipe.instructions}<br>
     <strong>Serving:</strong> ${recipe.servings}<br>
-    <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
+    <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}
+    <button onclick='mRead("${recipe.ingredients}", "${recipe.instructions}")'>Free hand mode</button>
+    `;
+    
     modalContainer.appendChild(modalContentDiv);
 
     modal.appendChild(modalContainer);
@@ -110,6 +113,74 @@ searchInput.addEventListener('input', () => {
   );
   displayRecipes(filteredRecipes);
 });
+
+function mRead(ingredients, instructions){
+
+let utterance = new SpeechSynthesisUtterance(`Before we get you started 
+lets make sure you have the following ingredients... ${ingredients}`);
+utterance.rate = 0.9
+  
+const synth = speechSynthesis;
+ 
+ let voices = synth.getVoices()
+    console.log(voices.length)
+     utterance.voice = voices[0];
+    
+    utterance.addEventListener("end", (event) => {
+
+      setTimeout(() => {
+        
+        let utterance2 = new SpeechSynthesisUtterance(`Shall we begin?`);
+        utterance2.voice = voices[0];
+        utterance2.rate = 0.8
+        speechSynthesis.speak(utterance2);
+
+        const user = confirm("Shall we begin?");
+
+        if(user)
+        {
+            let utterance3 = new SpeechSynthesisUtterance(`Great let's begin.`);
+            utterance3.voice = voices[0];
+            utterance3.rate = 0.8
+            speechSynthesis.speak(utterance3);
+
+            const ins = instructions.split(".,");
+            let nextStep = true;
+
+            let counter = 0;
+
+            let inter = setInterval(() => {
+
+              if(nextStep)
+              {
+                utterance3.text = `Step ${counter+1}, ${ins[counter]}`
+                speechSynthesis.speak(utterance3);
+
+                nextStep = false
+                counter++;
+
+                utterance3.addEventListener("end", (event) => {
+                  nextStep = true
+                });
+              }
+
+              if(counter == ins.length){
+
+                setTimeout(() => {
+                  utterance3.text = `Cooking complete, Well done!`
+                  speechSynthesis.speak(utterance3);
+                }, 3000)
+                
+                clearInterval(inter);
+              }
+            }, 1500)
+          }
+      }, 1000)
+    });
+    
+    speechSynthesis.speak(utterance);
+
+}
 
 // function filterRecipes({ cuisine }) {
 //   return recipes.filter(recipe => {
