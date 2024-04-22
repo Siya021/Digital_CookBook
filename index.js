@@ -1,100 +1,150 @@
-const url = 'https://dummyjson.com/recipes' ;
-let allRecipes = [];
-fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    allRecipes = data.recipes;
-    displayRecipes(allRecipes);
+document.addEventListener("DOMContentLoaded", function () {
+  const recipesUrl = 'https://dummyjson.com/recipes';
+  const youtubeUrl = 'vidz.json';
+  let allRecipes = [];
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || []; // Load favorites from localStorage
+
+  Promise.all([
+      fetch(recipesUrl).then(response => response.json()),
+      fetch(youtubeUrl).then(response => response.json())
+  ])
+      .then(([recipesData, youtubeData]) => {
+          allRecipes = recipesData.recipes.map((recipe, index) => {
+              recipe.youtubeLink = youtubeData.recipes[index].link;
+              return recipe;
+          });
+          displayRecipes(allRecipes);
+      });
+
+  const searchInput = document.getElementById('searchInput');
+
+  searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filteredRecipes = allRecipes.filter(recipe => recipe.name.toLowerCase().includes(searchTerm));
+      displayRecipes(filteredRecipes);
   });
 
   function displayRecipes(recipes) {
-    const recipesContainer = document.getElementById('recipes');
-    recipesContainer.innerHTML = '';
+      const recipesContainer = document.getElementById('recipes');
+      recipesContainer.innerHTML = '';
 
-    recipes.forEach(recipe => {
-        const card = document.createElement('div');
-        card.classList.add('recipe-card');
+      recipes.forEach(recipe => {
+          const card = createRecipeCard(recipe);
+          recipesContainer.appendChild(card);
+      });
+  }
 
-        const image = document.createElement('img');
-        image.src = recipe.image;
-        card.appendChild(image);
+  function createRecipeCard(recipe) {
+      const card = document.createElement('div');
+      card.classList.add('recipe-card');
 
-        const name = document.createElement('h2');
-        name.textContent = recipe.name;
-        card.appendChild(name);
+      const image = document.createElement('img');
+      image.src = recipe.image;
+      card.appendChild(image);
 
-        const difficulty = document.createElement('p');
-        difficulty.textContent = `Difficulty: ${recipe.difficulty}`;
-        card.appendChild(difficulty);
+      const name = document.createElement('h2');
+      name.textContent = recipe.name;
+      card.appendChild(name);
 
-        const ratingStars = document.createElement('p');
-        ratingStars.textContent = `Rating: ${getStars(recipe.rating)}`;
-        card.appendChild(ratingStars);
+      const difficulty = document.createElement('p');
+      difficulty.textContent = `Difficulty: ${recipe.difficulty}`;
+      card.appendChild(difficulty);
 
-        const readMoreBtn = document.createElement('button');
-        readMoreBtn.textContent = 'Read More';
-        readMoreBtn.addEventListener('click', () => {
-            openModal(recipe);
-        });
-        card.appendChild(readMoreBtn);
+      const ratingStars = document.createElement('p');
+      ratingStars.textContent = `Rating: ${getStars(recipe.rating)}`;
+      card.appendChild(ratingStars);
 
-        recipesContainer.appendChild(card);
-    });
-}
+      const readMoreBtn = document.createElement('button');
+      readMoreBtn.textContent = 'Read More';
+      readMoreBtn.addEventListener('click', () => {
+          showMoreDetails(recipe);
+      });
+      card.appendChild(readMoreBtn);
 
-function openModal(recipe) {
-    const modal = document.createElement("div");
-    modal.id = "myModal";
-    modal.className = "modal";
-    modal.style.display = "block";
+      if (!favorites.includes(recipe)) {
+          const favoriteBtn = document.createElement('button');
+          favoriteBtn.textContent = 'Favorite';
+          favoriteBtn.addEventListener('click', () => {
+              addToFavorites(recipe);
+          });
+          card.appendChild(favoriteBtn);
+      } else {
+          const deleteBtn = document.createElement('button');
+          deleteBtn.textContent = 'Delete';
+          deleteBtn.addEventListener('click', () => {
+              removeFromFavorites(recipe.name);
+          });
+          card.appendChild(deleteBtn);
+      }
 
-    const modalContainer = document.createElement("div");
-    modalContainer.className = "modal-content";
+      const youtubeLink = document.createElement('a');
+      youtubeLink.textContent = 'Watch on YouTube';
+      youtubeLink.href = recipe.youtubeLink;
+      youtubeLink.target = '_blank';
+      card.appendChild(youtubeLink);
 
-    const closeBtn = document.createElement("span");
-    closeBtn.className = "close";
-    closeBtn.innerHTML = "&times;";
-    closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-    modalContainer.appendChild(closeBtn);
-
-    const modalContentDiv = document.createElement("div");
-    modalContentDiv.id = "modal-content";
-    modalContentDiv.innerHTML = `Details for <strong>${recipe.name}</strong><br>
-    <strong>Ingredients:</strong> ${recipe.ingredients}<br>
-    <strong>Instructions:</strong> ${recipe.instructions}<br>
-    <strong>Serving:</strong> ${recipe.servings}<br>
-    <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
-    modalContainer.appendChild(modalContentDiv);
-
-    modal.appendChild(modalContainer);
-    document.body.appendChild(modal);
-}
+      return card;
+  }
 
 
+  function showMoreDetails(recipe) {
+      const modal = document.getElementById('myModal');
+      const modalContent = document.getElementById('modal-content');
+      modal.style.display = "block";
+      modalContent.innerHTML = `
+          <h2>${recipe.name}</h2>
+          <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+          <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+          <p><strong>Serving:</strong> ${recipe.servings}</p>
+          <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
+      `;
+  }
 
-function getStars(rating) {
-  const roundedRating = Math.round(rating); 
-  const stars =  '⭐'.repeat(roundedRating);
-  return stars;
-}
+  const closeModalBtn = document.getElementsByClassName('close')[0];
+  const modal = document.getElementById('myModal');
 
-const searchInput = document.querySelector('#searchInput');
-searchInput.addEventListener('input', () => {
-  const searchTerm = searchInput.value.toLowerCase();
-  const filteredRecipes = allRecipes.filter(recipe =>
-    recipe.name.toLowerCase().includes(searchTerm)
-  );
-  displayRecipes(filteredRecipes);
+  closeModalBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+          modal.style.display = 'none';
+      }
+  });
+
+  function getStars(rating) {
+      const roundedRating = Math.round(rating);
+      const stars = '⭐'.repeat(roundedRating);
+      return stars;
+  }
+
+
+  function addToFavorites(recipe) {
+      if (!favorites.includes(recipe)){
+      favorites.push(recipe);
+      updateFavoritesNav();
+      saveFavoritesToLocalStorage();
+  }}
+
+  function removeFromFavorites(recipeName) {
+      favorites = favorites.filter(recipe => recipe.name !== recipeName);
+      updateFavoritesNav();
+      saveFavoritesToLocalStorage();
+      displayRecipes(favorites);
+  }
+
+  function updateFavoritesNav() {
+      const favoritesNav = document.getElementById('favorites');
+      favoritesNav.textContent = `Favorites (${favorites.length})`;
+  }
+
+  function saveFavoritesToLocalStorage() {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
+
+  const favoritesNav = document.getElementById('favorites');
+  favoritesNav.addEventListener('click', () => {
+      displayRecipes(favorites);
+  });
 });
-
-// function filterRecipes({ cuisine }) {
-//   return recipes.filter(recipe => {
-//       return recipe.cuisine.toLowerCase() === cuisine.toLowerCase();
-//   });
-// }
-
-// const filteredRecipes = filterRecipes({ cuisine: "italian" }); // Change "italian" to the desired cuisine
-// console.log(filteredRecipes);
-
