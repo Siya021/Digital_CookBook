@@ -10,10 +10,10 @@ body {
 }
 
 nav {
-    background-color:brown;
-    color: rgb(202, 137, 16);
-    padding: 10px 20px;
-    text-align: center;
+  background-color: brown;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
 }
 
 nav .navbar-brand img {
@@ -36,7 +36,7 @@ nav ul li a {
   text-decoration: none;
 }
 
-.container {
+.container-fluid {
   padding: 20px;
 }
 
@@ -97,95 +97,55 @@ nav ul li a {
 }
 
 .recipe-card p {
-padding: 10px;
+  margin-top: 5px;
+  color: rgb(48, 45, 45);
 }
 
-/* Style for the modal */
-#myModal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 9999; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
-  }
-  
-  /* Style for the modal content */
-  #modal-content {
-    background-color: #fefefe;
-    margin: 10% auto; /* 10% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* 80% width */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Box shadow */
-  }
-  
-  /* Close button style */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .banner{
-    /* background-image: url('/images/ca658a1987ebce01fd99f0a3db713120.jpg'); */
-    background-repeat: no-repeat;
-    /* background-position: cover; */
-    background-size: cover;
-    margin-top: px;
-    border: #ca8910 solid 3px;
-    height: 400px;
-    width: 100%;
-    padding: 30px;
-    gap: 50px;
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto;
 }
 
-.search-container{
-    margin-top: 50px;
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-#saved {
-    border: black solid 3px;
-    height: 60px;
-    margin-top: 50px;
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.slide {
-    display: flex;
-    overflow: hidden;
-    width: 100%;
-    max-width: 600px; /* Adjust the width as needed */
-    margin: 0 auto;
-  }
+.close:hover {
+  color: black;
+}
 
-  .item {
-    flex: 0 0 auto;
-    width: 100%;
-    transition: transform 0.5s ease;
-  }
+button{
+  border-radius: 20px;
+  color: #ffc107;
+  background-color: brown;
+  margin-left: 30px;
+  margin-top: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
 
-  .content {
-    text-align: center;
-    padding: 20px;
-    color: white;
-  }
-
-
-
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    cursor: pointer;
-  }
+a{
+  padding: 10px;
+}
