@@ -72,13 +72,7 @@ function openModal(recipe) {
     document.body.appendChild(modal);
 }
 
-// function showMoreDetails(recipe, modalContent) {
-//   modalContent.innerHTML = `Details for <strong>${recipe.name}</strong><br>
-//     <strong>Ingredients:</strong> ${recipe.ingredients}<br>
-//     <strong>Instructions:</strong> ${recipe.instructions}<br>
-//     <strong>Serving:</strong> ${recipe.servings}<br>
-//     <strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}`;
-// }
+
 
 function getStars(rating) {
   const roundedRating = Math.round(rating); 
