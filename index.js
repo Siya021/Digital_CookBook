@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function getStars(rating) {
       const roundedRating = Math.round(rating);
-      const stars = '⭐'.repeat(roundedRating);
+      const stars = '🔥'.repeat(roundedRating);
       return stars;
   }
 
