@@ -54,16 +54,18 @@ document.addEventListener("DOMContentLoaded", function () {
       ratingStars.textContent = `Rating: ${getStars(recipe.rating)}`;
       card.appendChild(ratingStars);
 
-      const readMoreBtn = document.createElement('button');
-      readMoreBtn.textContent = 'Read More';
+      const readMoreBtn = document.createElement('a');
+      readMoreBtn.innerHTML = '<i class="fas fa-arrow-right-to-bracket fa-1xl" id="modal-icon"></i>'; 
       readMoreBtn.addEventListener('click', () => {
           showMoreDetails(recipe);
       });
       card.appendChild(readMoreBtn);
 
+      
+
       if (!favorites.includes(recipe)) {
-          const favoriteBtn = document.createElement('button');
-          favoriteBtn.textContent = 'Favorite';
+          const favoriteBtn = document.createElement('a');
+          favoriteBtn.innerHTML = '<i class="fas fa-heart fa-1xl" id="modal-icon"></i>';
           favoriteBtn.addEventListener('click', () => {
               addToFavorites(recipe);
           });
@@ -78,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const youtubeLink = document.createElement('a');
-      youtubeLink.textContent = 'Watch on YouTube';
+      youtubeLink.innerHTML = '<i class="fa-regular fa-circle-play fa-1xl" id="modal-icon"></i>';
       youtubeLink.href = recipe.youtubeLink;
       youtubeLink.target = '_blank';
       card.appendChild(youtubeLink);
@@ -88,17 +90,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   function showMoreDetails(recipe) {
-      const modal = document.getElementById('myModal');
-      const modalContent = document.getElementById('modal-content');
-      modal.style.display = "block";
-      modalContent.innerHTML = `
-          <h2>${recipe.name}</h2>
-          <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
-          <p><strong>Instructions:</strong> ${recipe.instructions}</p>
-          <p><strong>Serving:</strong> ${recipe.servings}</p>
-          <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
-      `;
-  }
+    const modal = document.getElementById('myModal');
+    const modalContent = document.getElementById('modal-content');
+    modal.style.display = "block";
+    modalContent.innerHTML = `
+        <div class="modal-dialog modal-fullscreen-xxl-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                <img src="${recipe.image}" class="modal-image">
+                <div class="time-info">
+                <h1 class="modal-title"><strong>${recipe.name}</strong> (${recipe.mealType}) </h1>
+                  <p><i class="fa-regular fa-clock"></i> Prep Time: ${recipe.prepTimeMinutes} min</p>   
+                  <p><i class="fa-solid fa-clock"></i> Cook Time: ${recipe.cookTimeMinutes} min</p>
+                  <p><strong><i class="fa-solid fa-people-group"></i></strong> ${recipe.servings} people/person</p>
+                  
+                  <div class="modal-btns">
+                  <a><i class="fa-regular fa-circle-play fa-2xl"></i></a>
+                  <a><i class="fas fa-heart fa-2xl" ></i></a>
+                  <a><i class="fa-solid fa-volume-high fa-2xl"></i></a>
+                  </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                <p>Tags: ${recipe.tags}</p>
+                    <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+                    <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+
+                    <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
+                </div>
+                
+            </div>
+        </div>
+    `;
+    const myModal = new bootstrap.Modal(modal);
+    myModal.show();
+}
+
+
+  // function showMoreDetails(recipe) {
+  //     const modal = document.getElementById('myModal');
+  //     const modalContent = document.getElementById('modal-content');
+  //     modal.style.display = "block";
+  //     modalContent.innerHTML = `
+  //         <h2>${recipe.name}</h2>
+  //         <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+  //         <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+  //         <p><strong>Serving:</strong> ${recipe.servings}</p>
+  //         <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
+  //     `;
+  // }
 
   const closeModalBtn = document.getElementsByClassName('close')[0];
   const modal = document.getElementById('myModal');
