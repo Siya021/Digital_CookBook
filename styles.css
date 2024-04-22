@@ -150,7 +150,7 @@ a{
   padding: 10px;
 }
 footer{
-    width: 100%;
+    width: auto;
     /* position: absolute; */
     bottom: 0;
     background-color: brown;
