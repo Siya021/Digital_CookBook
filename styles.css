@@ -1,6 +1,6 @@
 * {
-  margin: 20px;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   color: #ffc107;
 }
@@ -36,10 +36,14 @@ nav ul li a {
   text-decoration: none;
 }
 
-.container-fluid {
+.container {
   padding: 20px;
 }
 
+.landing-section{
+  margin:20px;
+  padding:20px;
+}
 .heading {
   text-align: center;
   margin-bottom: 20px;
@@ -71,7 +75,8 @@ nav ul li a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 20px;
+  margin: 20px;
+  padding:50px;
 }
 
 .recipe-card {
