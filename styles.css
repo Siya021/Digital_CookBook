@@ -5,8 +5,8 @@
 }
 
 nav {
-    background-color:brown;
-    color: rgb(202, 137, 16);
+    background-color:rgba(165, 42, 42, 0.445);
+    color: rgba(202, 137, 16, 0.363);
     padding: 10px 20px;
     text-align: center;
 }
@@ -151,16 +151,18 @@ padding: 10px;
   }
   
   .banner{
-    /* background-image: url('/images/ca658a1987ebce01fd99f0a3db713120.jpg'); */
+    background-image: url('/images/ca658a1987ebce01fd99f0a3db713120.jpg');
     background-repeat: no-repeat;
     /* background-position: cover; */
     background-size: cover;
     margin-top: px;
-    border: #ca8910 solid 3px;
-    height: 400px;
+    border-bottom: #ca8910 solid 3px;
+    height: 300px;
     width: 100%;
     padding: 30px;
     gap: 50px;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
 }
 
 .search-container{
