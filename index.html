@@ -46,20 +46,16 @@
         <div class="banner" >
             <div class="container">
                 <h1 class="heading">Welcome to food deli</h1>
-                <div class="btn-group">
-                    <label>
-                        <input type="radio" name="mealType" value="breakfast" checked>
-                        Breakfast
-                    </label>
-                    <label>
-                        <input type="radio" name="mealType" value="lunch">
-                        Lunch
-                    </label>
-                    <label>
-                        <input type="radio" name="mealType" value="dinner">
-                        Dinner
-                    </label>
-                </div>
+                <form id="filterForm">
+                  <label for="breakfast">Breakfast</label>
+                  <input type="radio" id="breakfast" name="mealType" value="Breakfast">
+              
+                  <label for="lunch">Lunch</label>
+                  <input type="radio" id="lunch" name="mealType" value="Lunch">
+              
+                  <label for="dinner">Dinner</label>
+                  <input type="radio" id="dinner" name="mealType" value="Dinner">
+              </form>
             </div>
         </div>
         <!-- Banner End -->
