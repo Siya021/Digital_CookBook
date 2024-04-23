@@ -71,8 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             card.appendChild(favoriteBtn);
         } else {
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Delete';
+            const deleteBtn = document.createElement('a');
+            deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
             deleteBtn.addEventListener('click', () => {
                 removeFromFavorites(recipe.name);
             });
