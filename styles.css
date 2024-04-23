@@ -7,6 +7,7 @@
 
 body {
   font-family: Arial, sans-serif;
+  /* min-height:100vh; */
 }
 
 nav {
@@ -151,7 +152,7 @@ a{
 }
 footer{
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
     background-color: brown;
     color: #fff;
