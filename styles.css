@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #ffc107;
 }
 
 body {
@@ -59,11 +58,11 @@ nav ul li a {
 .btn-group label {
   cursor: pointer;
   padding: 10px 20px;
-  border: 2px solid #ffc107;
+  border: 2px solid gray;
   border-radius: 20px;
   margin: 0 10px;
   background-color: transparent;
-  color: #ffc107;
+  color: gray;
   transition: all 0.3s ease;
 }
 
@@ -85,7 +84,7 @@ nav ul li a {
   width: calc(33.33% - 20px);
   margin-bottom: 20px;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color: #FED99B;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
