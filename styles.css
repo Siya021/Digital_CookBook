@@ -6,7 +6,6 @@
 
 body {
   font-family: Arial, sans-serif;
-  /* min-height:100vh; */
 }
 
 nav {
@@ -208,11 +207,14 @@ button,a{
   margin-bottom: 20px;
   padding: 10px; */
   cursor: pointer;
+  text-decoration: none;
 }
 
 a{
+text-decoration: none;
   padding: 10px;
 }
+
 footer{
 
     width: 100%;
