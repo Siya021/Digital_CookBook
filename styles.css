@@ -17,6 +17,7 @@ nav {
 .second {
   background-color: brown; 
   padding: 10px 40px;
+  border-bottom-right-radius: 100px;
 }
 .news {
   color: brown;
