@@ -14,6 +14,7 @@ nav {
   color: white;
   padding: 10px 20px;
   text-align: center;
+  width: auto;
 }
 
 nav .navbar-brand img {
@@ -79,16 +80,19 @@ nav ul li a {
   padding:50px;
   
 }
-
 .recipe-card {
   width: calc(33.33% - 20px);
   margin-bottom: 20px;
   padding: 10px;
-  background-color: #FED99B;
+  background-color: #fed998;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; 
 }
 
+.recipe-card:hover {
+  transform: scale(1.05); 
+}
 .recipe-card img {
   width: 100%;
   height: 200px;
