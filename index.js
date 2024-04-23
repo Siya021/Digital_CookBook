@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const recipesUrl = 'https://dummyjson.com/recipes';
   const youtubeUrl = 'vidz.json';
   let allRecipes = [];
-  let favorites = JSON.parse(localStorage.getItem('favorites')) || []; // Load favorites from localStorage
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || []; 
 
   Promise.all([
       fetch(recipesUrl).then(response => response.json()),
@@ -88,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return card;
   }
 
-
   function showMoreDetails(recipe) {
     const modal = document.getElementById('myModal');
     const modalContent = document.getElementById('modal-content');
@@ -100,50 +99,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 <img src="${recipe.image}" class="modal-image">
                 <div class="time-info">
                 <h1 class="modal-title"><strong>${recipe.name}</strong> (${recipe.mealType}) </h1>
-                  <p><i class="fa-regular fa-clock"></i> Prep Time: ${recipe.prepTimeMinutes} min</p>   
-                  <p><i class="fa-solid fa-clock"></i> Cook Time: ${recipe.cookTimeMinutes} min</p>
-                  <p><strong><i class="fa-solid fa-people-group"></i></strong> ${recipe.servings} people/person</p>
-                  
-                  <div class="modal-btns">
-                  <a><i class="fa-regular fa-circle-play fa-2xl"></i></a>
-                  <a><i class="fas fa-heart fa-2xl"></i></a>
-                  <a><i class="fa-solid fa-volume-high fa-2xl"></i></a>
-                  </div>
+                <p><i class="fa-regular fa-clock"></i> Prep Time: ${recipe.prepTimeMinutes} min</p>   
+                <p><i class="fa-solid fa-clock"></i> Cook Time: ${recipe.cookTimeMinutes} min</p>
+                <p><strong><i class="fa-solid fa-people-group"></i></strong> ${recipe.servings} people/person</p>
+
+                <div class="modal-btns">
+                <a><i class="fa-regular fa-circle-play fa-2xl"></i></a>
+                <a><i class="fas fa-heart fa-2xl"></i></a>
+                <a><i class="fa-solid fa-volume-high fa-2xl"></i></a>
+                </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
                 <div class="modal-body">
                 <p>Tags: ${recipe.tags}</p>
-                    <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
-                    <p><strong>Instructions:</strong> ${recipe.instructions}</p>
-
-                    <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
+                <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+                <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+                <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
                 </div>
-                
             </div>
         </div>
     `;
     const myModal = new bootstrap.Modal(modal);
     myModal.show();
 }
-
-
-  // function showMoreDetails(recipe) {
-  //     const modal = document.getElementById('myModal');
-  //     const modalContent = document.getElementById('modal-content');
-  //     modal.style.display = "block";
-  //     modalContent.innerHTML = `
-  //         <h2>${recipe.name}</h2>
-  //         <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
-  //         <p><strong>Instructions:</strong> ${recipe.instructions}</p>
-  //         <p><strong>Serving:</strong> ${recipe.servings}</p>
-  //         <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
-  //     `;
-  // }
-
-  const closeModalBtn = document.getElementsByClassName('close')[0];
-  const modal = document.getElementById('myModal');
 
 function mRead(ingredients){
 
@@ -214,21 +193,6 @@ const synth = speechSynthesis;
 
 }
 
-// function filterRecipes({ cuisine }) {
-//   return recipes.filter(recipe => {
-//       return recipe.cuisine.toLowerCase() === cuisine.toLowerCase();
-//   });
-// }
-  closeModalBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-  });
-
-  window.addEventListener('click', (event) => {
-      if (event.target === modal) {
-          modal.style.display = 'none';
-      }
-  });
-
   function getStars(rating) {
       const roundedRating = Math.round(rating);
       const stars = '🔥'.repeat(roundedRating);
@@ -263,4 +227,60 @@ const synth = speechSynthesis;
   favoritesNav.addEventListener('click', () => {
       displayRecipes(favorites);
   });
+});
+
+function filterRecipesByMealType(recipes, mealType) {
+    const validMealTypes = ["Breakfast", "Lunch", "Dinner"];
+    if (!validMealTypes.includes(mealType)) {
+        console.error("Invalid meal type. Please provide 'Breakfast', 'Lunch', or 'Dinner'.");
+        return [];
+    }
+
+    return recipes.filter(recipe => recipe.mealType.includes(mealType));
+}
+function sortByDifficulty(recipes) {
+    const difficultyOrder = {
+        "easy": 1,
+        "medium": 2,
+        "hard": 3
+    };
+  
+    recipes.sort((a, b) => {
+        const difficultyA = difficultyOrder[a.difficulty.toLowerCase()];
+        const difficultyB = difficultyOrder[b.difficulty.toLowerCase()];
+  
+        console.log(difficultyA - difficultyB)
+  
+        return difficultyA - difficultyB;
+    });
+  
+    return recipes;
+  }
+  
+
+document.addEventListener("DOMContentLoaded", function() {
+    const radioInputs = document.querySelectorAll('input[name="mealType"]');
+    radioInputs.forEach(input => {
+        input.addEventListener("change", function() {
+            const selectedMealType = this.value;
+            const filteredRecipes = filterRecipesByMealType(allRecipes, selectedMealType);
+            console.log(filteredRecipes); // Log filtered recipes to the console
+            displayRecipes(filteredRecipes);
+        });
+    });
+    document.getElementById('difficulty').addEventListener('change', function() {
+        const selectedDifficulty = this.value;
+        let sortedRecipes = allRecipes.slice(); // Make a copy of allRecipes
+    
+        
+        if (selectedDifficulty !== "none") {
+            sortedRecipes = sortByDifficulty(sortedRecipes, selectedDifficulty);
+            console.log(sortedRecipes);
+            displayRecipes(sortedRecipes);
+        }else {
+          sortedRecipes = sortByDifficulty(allRecipes, selectedDifficulty);
+    
+        //   console.log(sortedRecipes);
+        }
+    });
 });
