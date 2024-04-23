@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const recipesUrl = 'https://dummyjson.com/recipes';
     const youtubeUrl = 'vidz.json';
     let allRecipes = [];
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || []; // Load favorites from localStorage
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   
     Promise.all([
         fetch(recipesUrl).then(response => response.json()),
