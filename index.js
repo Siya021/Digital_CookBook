@@ -256,7 +256,7 @@ function filterRecipesByMealType(recipes, mealType){
         console.error("Invalid meal type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
         return[];
     }
-    return recipes.filter(recipe => recipe.mealType.icludes(mealType));
+    return recipes.filter(recipe => recipe.mealType.includes(mealType));
 }
 const radioInputs = document.querySelectorAll('input[name= "mealType"]');
 radioInputs.forEach(input => {
