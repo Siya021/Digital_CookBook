@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
     const recipesUrl = 'https://dummyjson.com/recipes';
     const youtubeUrl = 'vidz.json';
     let allRecipes = [];
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(youtubeUrl)
     .then(response => response.json())
     .then(youtubeData => {
-            allRecipes = data.recipes.map((recipe, index) => {
+            allRecipes = youtubeData.recipes.map((recipe, index) => {
                 recipe.youtubeLink = youtubeData.recipes[index].link;
                 return recipe;
             });
@@ -229,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
     favoritesNav.addEventListener('click', () => {
         displayRecipes(favorites);
     });
-});
+
 
 function mysort(recipes){
     const difficultyOrder = ['easy','medium','hard']
@@ -252,17 +251,27 @@ sortDropdown.addEventListener('change',function(){
 
 function filterRecipesByMealType(recipes, mealType){
     const validMealTypes = ["Breakfast","Lunch","Dinner"];
+    
     if (!validMealTypes.includes(mealType)){
         console.error("Invalid meal type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
         return[];
     }
-    return recipes.filter(recipe => recipe.mealType.includes(mealType));
+    const filtered =  recipes.filter(recipe => recipe.mealType.includes(mealType));
+
+    return filtered
 }
-const radioInputs = document.querySelectorAll('input[name= "mealType"]');
-radioInputs.forEach(input => {
-    input.addEventListener("change", function(){
-        const selectedMealType = this.value;
-        const filteredRecipes = filterRecipesByMealType(allRecipes, selectedMealType);
-        displayRecipes(filteredRecipes)
+
+document.addEventListener("DOMContentLoaded", function(){
+    const radioInputs = document.querySelectorAll('input[name= "mealType"]');
+    radioInputs.forEach(input => {
+        input.addEventListener("change", function(){
+            const selectedMealType = this.value;
+            console.log(allRecipes)
+            const filteredRecipes = filterRecipesByMealType(allRecipes, selectedMealType);
+    
+            console.log(filteredRecipes);
+            displayRecipes(filteredRecipes)
+        })
     })
+    
 })
