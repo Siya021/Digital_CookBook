@@ -13,9 +13,9 @@
 <body>
     <!-- Start of Navbar -->
     <section class="hero">
-        <div class="news">
+        <!-- <div class="news">
           <a href="#footer">Sign Up to newsletter</a>
-        </div>
+        </div> -->
         <nav class="navbar navbar-expand-lg ">
           <div class="container-fluid">
            <a href="/landingPage.html"><img class="navbar-brand" src="./images/Apple Watch 40mm - 2 (1).png" alt=""></a>
@@ -39,27 +39,47 @@
           </div>
           
         </nav> 
+
         <div class="second">
           <hr>
           <form class="d-flex" role="search">
             <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           </form>
-          <div class="filter-box">
-            <div class="btn-group">
-              <label>
-                  <input type="radio" name="mealType" value="Breakfast" checked>
-                  Breakfast
-              </label>
-              <label>
-                  <input type="radio" name="mealType" value="Lunch">
-                  Lunch
-              </label>
-              <label>
-                  <input type="radio" name="mealType" value="Dinner">
-                  Dinner
-              </label>
-           </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="banner" >
+                <div class="container">
+                  <label for="difficulty" style="color: white;">Difficulty:</label>
+                  <select id="difficulty">
+                    <option value="None">None</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+                </div>
+            </div>
+
+            </div>
+            <div class="col-6">
+              <div class="filter-box">
+                <div class="btn-group">
+                  <label>
+                      <input type="radio" name="mealType" value="Breakfast" checked>
+                      Breakfast
+                  </label>
+                  <label>
+                      <input type="radio" name="mealType" value="Lunch">
+                      Lunch
+                  </label>
+                  <label>
+                      <input type="radio" name="mealType" value="Dinner">
+                      Dinner
+                  </label>
+               </div>
+              </div>
+            </div>
           </div>
+          
         </div>
         
        </section>
@@ -67,18 +87,7 @@
   
       <section class="landing-section">
           <!-- Banner start-->
-          <div class="banner" >
-              <div class="container">
-                  <h1 class="greating">Welcome to food deli</h1>
-  
-                <select id="difficulty">
-                  <option value="None">None</option>
-                  <option value="Easy">Easy</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Hard">Hard</option>
-              </select>
-              </div>
-          </div>
+          
           <!-- Banner End -->
       </section>
   
