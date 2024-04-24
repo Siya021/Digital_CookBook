@@ -3,7 +3,10 @@
     const youtubeUrl = 'vidz.json';
     let allRecipes = [];
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  
+    // const favoritesNav = document.getElementById('favorites');
+    // favoritesNav.addEventListener('click', () => {
+    //     displayRecipes(favorites);
+    // });
     Promise.all([
         fetch(recipesUrl).then(response => response.json()),
         fetch(youtubeUrl).then(response => response.json())
