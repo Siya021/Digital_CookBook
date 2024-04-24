@@ -1,12 +1,9 @@
-// document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const recipesUrl = 'https://dummyjson.com/recipes';
     const youtubeUrl = 'vidz.json';
     let allRecipes = [];
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    // const favoritesNav = document.getElementById('favorites');
-    // favoritesNav.addEventListener('click', () => {
-    //     displayRecipes(favorites);
-    // });
+  
     Promise.all([
         fetch(recipesUrl).then(response => response.json()),
         fetch(youtubeUrl).then(response => response.json())
@@ -131,6 +128,20 @@
       myModal.show();
   }
   
+  
+    // function showMoreDetails(recipe) {
+    //     const modal = document.getElementById('myModal');
+    //     const modalContent = document.getElementById('modal-content');
+    //     modal.style.display = "block";
+    //     modalContent.innerHTML = `
+    //         <h2>${recipe.name}</h2>
+    //         <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+    //         <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+    //         <p><strong>Serving:</strong> ${recipe.servings}</p>
+    //         <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
+    //     `;
+    // }
+  
     const closeModalBtn = document.getElementsByClassName('close')[0];
     const modal = document.getElementById('myModal');
   
@@ -202,7 +213,22 @@
       speechSynthesis.speak(utterance);
   
   }
-
+  
+  // function filterRecipes({ cuisine }) {
+  //   return recipes.filter(recipe => {
+  //       return recipe.cuisine.toLowerCase() === cuisine.toLowerCase();
+  //   });
+  // }
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+  
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+  
     function getStars(rating) {
         const roundedRating = Math.round(rating);
         const stars = '🔥'.repeat(roundedRating);
@@ -237,4 +263,4 @@
     favoritesNav.addEventListener('click', () => {
         displayRecipes(favorites);
     });
-// });
+});
