@@ -1,4 +1,4 @@
-// document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const recipesUrl = 'https://dummyjson.com/recipes';
     const youtubeUrl = 'vidz.json';
     let allRecipes = [];
@@ -81,6 +81,7 @@
         youtubeLink.href = recipe.youtubeLink;
         youtubeLink.target = '_blank';
         card.appendChild(youtubeLink);
+  
         return card;
     }
   
@@ -97,7 +98,8 @@
                   <h1 class="modal-title"><strong>${recipe.name}</strong> (${recipe.mealType}) </h1>
                     <p><i class="fa-regular fa-clock"></i> Prep Time: ${recipe.prepTimeMinutes} min</p>   
                     <p><i class="fa-solid fa-clock"></i> Cook Time: ${recipe.cookTimeMinutes} min</p>
-                    <p><strong><i class="fa-solid fa-people-group"></i></strong> ${recipe.servings} people/person</p>                  
+                    <p><strong><i class="fa-solid fa-people-group"></i></strong> ${recipe.servings} people/person</p>
+                    
                     <div class="modal-btns">
                     <a><i class="fa-regular fa-circle-play fa-2xl"></i></a>
                     <a><i class="fas fa-heart fa-2xl"></i></a>
@@ -106,63 +108,63 @@
                   </div>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
+                  
                   <div class="modal-body">
                   <p>Tags: ${recipe.tags}</p>
                       <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
                       <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+  
                       <p><strong>Calories per Serving:</strong> ${recipe.caloriesPerServing}</p>
-                  </div>                 
+                  </div>
+                  
               </div>
           </div>
       `;
-        const myModal = new bootstrap.Modal(modal);
-        myModal.show();
+      const myModal = new bootstrap.Modal(modal);
+      myModal.show();
   }
-
-    function getStars(rating) {
-        const roundedRating = Math.round(rating);
-        const stars = '🔥'.repeat(roundedRating);
-        return stars;
-    }
-
-    function mRead(ingredients){
+  
+    const closeModalBtn = document.getElementsByClassName('close')[0];
+    const modal = document.getElementById('myModal');
+  
+  function mRead(ingredients){
+  
+    // Create New Speech Synthesis Utterance 
+  let utterance = new SpeechSynthesisUtterance(`Before we get you started 
+  lets make sure you have the following ingredients... ${ingredients}`);
+  utterance.rate = 0.9
     
-        // Create New Speech Synthesis Utterance 
-    let utterance = new SpeechSynthesisUtterance(`Before we get you started 
-    lets make sure you have the following ingredients... ${ingredients}`);
-    utterance.rate = 0.9
-        
-    const synth = speechSynthesis;
-    
-    let voices = synth.getVoices()
-    
-        utterance.voice = voices[0];
-        
-        utterance.addEventListener("end", (event) => {
-    
-            setTimeout(() => {
-            
-            let utterance2 = new SpeechSynthesisUtterance(`Shall we begin?`);
-            utterance2.voice = voices[0];
-            utterance2.rate = 0.8
-            speechSynthesis.speak(utterance2);
-    
-            const user = confirm("Shall we begin?");
-
-        if(user)
-        {
-            let utterance3 = new SpeechSynthesisUtterance(`Great let's begin.`);
-            utterance3.voice = voices[0];
-            utterance3.rate = 0.8
-            speechSynthesis.speak(utterance3);
-    
-            const ins = instructions.split(".,");
-            let nextStep = true;
-
-            let counter = 0;
-
-            let inter = setInterval(() => {
-
+  const synth = speechSynthesis;
+   
+   let voices = synth.getVoices()
+   
+       utterance.voice = voices[0];
+      
+      utterance.addEventListener("end", (event) => {
+  
+        setTimeout(() => {
+          
+          let utterance2 = new SpeechSynthesisUtterance(`Shall we begin?`);
+          utterance2.voice = voices[0];
+          utterance2.rate = 0.8
+          speechSynthesis.speak(utterance2);
+  
+          const user = confirm("Shall we begin?");
+  
+          if(user)
+          {
+              let utterance3 = new SpeechSynthesisUtterance(`Great let's begin.`);
+              utterance3.voice = voices[0];
+              utterance3.rate = 0.8
+              speechSynthesis.speak(utterance3);
+  
+              const ins = instructions.split(".,");
+              let nextStep = true;
+  
+              let counter = 0;
+  
+              let inter = setInterval(() => {
+  
                 if(nextStep)
                 {
                 utterance3.text = `Step ${counter+1}, ${ins[counter]}`
@@ -193,7 +195,11 @@
             speechSynthesis.speak(utterance);
   }
 
-  
+    function getStars(rating) {
+        const roundedRating = Math.round(rating);
+        const stars = '🔥'.repeat(roundedRating);
+        return stars;
+    }
   
   
     function addToFavorites(recipe) {
@@ -224,11 +230,3 @@
         displayRecipes(favorites);
     });
 // });
-
-const searchInput = document.getElementById('searchInput');
-  
-searchInput.addEventListener('input', () => {
-    const searchTerm = searchInput.value.toLowerCase();
-    const filteredRecipes = allRecipes.filter(recipe => recipe.name.toLowerCase().includes(searchTerm));
-    displayRecipes(filteredRecipes);
-});
