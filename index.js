@@ -229,4 +229,40 @@ document.addEventListener("DOMContentLoaded", function () {
     favoritesNav.addEventListener('click', () => {
         displayRecipes(favorites);
     });
-// });
+});
+
+function mysort(recipes){
+    const difficultyOrder = ['easy','medium','hard']
+
+    recipes.sort((a,b)=>{
+        const difficultyA= difficultyOrder.indexOf(a.diffficulty);
+        const difficultyB= difficultyOrder.indexOf(b.diffficulty);
+        return difficultyA - difficultyB;
+    })
+    console.log(recipes)
+    displayRecipes(recipes);
+}
+const sortDropdown = document.getElementById('difficulty');
+sortDropdown.addEventListener('change',function(){
+    const selectedDifficulty = sortDropdown.ariaValueMax;
+    const sortedRecipes = recipes.filter(recipe => recipe.difficulty === selectedDifficulty)
+    mysort(sortedRecipes);
+    console.log(sortedRecipes)
+})
+
+function filterRecipesByMealType(recipes, mealType){
+    const validMealTypes = ["Breakfast","Lunch","Dinner"];
+    if (!validMealTypes.includes(mealType)){
+        console.error("Invalid meal type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
+        return[];
+    }
+    return recipes.filter(recipe => recipe.mealType.icludes(mealType));
+}
+const radioInputs = document.querySelectorAll('input[name= "mealType"]');
+radioInputs.forEach(input => {
+    input.addEventListener("change", function(){
+        const selectedMealType = this.value;
+        const filteredRecipes = filterRecipesByMealType(allRecipes, selectedMealType);
+        displayRecipes(filteredRecipes)
+    })
+})
