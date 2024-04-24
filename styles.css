@@ -1,19 +1,34 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+** {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
+  font-family: "Bubblegum Sans", sans-serif;
+  font-weight: 300;
 }
 
 nav {
   background-color: brown;
   color: white;
-  padding: 10px 20px;
+ padding: 10px 20px;
   text-align: center;
   width: auto;
+}
+.second {
+  background-color: brown; 
+  padding: 10px 40px;
+  border-bottom-right-radius: 100px;
+}
+.news {
+  color: brown;
+  background-color: #000;
+  font-weight: 300;
+  text-decoration: none;
+  text-align: center;
+}
+
+.news a {
+  text-decoration: none;
 }
 
 nav .navbar-brand img {
@@ -40,6 +55,57 @@ nav ul li a {
   padding: 20px;
 }
 
+.video-container {
+  
+  align-items: center;
+
+}
+
+.video-container h1 {
+  font-size: 90px;
+  color: #ffc107;
+  font-weight: 600;
+  transition: 0.5s;
+  text-align: start;
+}
+
+.video-container h1 {
+  -webkit-text-stroke: 2px #ffc107;
+  color: transparent;
+}
+
+.video-container a {
+  text-decoration: none;
+  display: inline-block;
+  color: brown;
+  font-size: 24px;
+  border: 2px solid brown;
+  padding: 14px 70px;
+  border-radius: 50px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1 ;
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .back-video{
+    width: auto;
+    height: 100%;
+  }
+  
+}
+
+#front {
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
 .landing-section{
   margin:20px;
   padding:20px;
@@ -271,7 +337,7 @@ footer{
      h3{
         margin-right:20px;
      }
-     hr{
+    .footer-bottom{
         width: 90px;
         border: 0;
         border-bottom: 1px solid #ccc;
@@ -340,4 +406,5 @@ footer{
 }
 
 .modal-btns {
- margin-top: 30px;}
+ margin-top: 30px;
+}
