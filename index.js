@@ -113,6 +113,13 @@
         `;
         const myModal = new bootstrap.Modal(modal);
         myModal.show();
+
+             const favoriteBtn = modalContent.querySelector('.favoriteBtn');
+        favoriteBtn.addEventListener('click', () => {
+            addToFavorites(recipe);
+            updateFavoritesNav();
+        });
+    }
     
         const textToSpeechBtn = document.getElementById('textToSpeechBtn');
         textToSpeechBtn.addEventListener('click', () => {
@@ -120,12 +127,7 @@
             mRead(recipe.ingredients, recipe.instructions);
         });
     
-        const favoriteBtn = modalContent.querySelector('.favoriteBtn');
-        favoriteBtn.addEventListener('click', () => {
-            addToFavorites(recipe);
-            updateFavoritesNav();
-        });
-    }
+   
   
     function mRead(ingredients,instructions){
   
