@@ -3,7 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const youtubeUrl = 'vidz.json';
     let allRecipes = [];
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  
+    const favoritesNav = document.getElementById('favorites');
+    favoritesNav.addEventListener('click', () => {
+        displayRecipes(favorites);
+    });
     Promise.all([
         fetch(recipesUrl).then(response => response.json()),
         fetch(youtubeUrl).then(response => response.json())
@@ -126,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
       const myModal = new bootstrap.Modal(modal);
       myModal.show();
+      
   }
   
   
@@ -259,8 +263,5 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }
   
-    const favoritesNav = document.getElementById('favorites');
-    favoritesNav.addEventListener('click', () => {
-        displayRecipes(favorites);
-    });
+    
 });
