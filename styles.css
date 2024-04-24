@@ -29,6 +29,7 @@ nav {
 
 .news a {
   text-decoration: none;
+  color: white;
 }
 
 nav .navbar-brand img {
@@ -248,10 +249,14 @@ footer{
         margin: auto;
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-between;
     }
-    .col{
+    .footer-img {
+      height: 100px;
+      width: 200px;
+    }
+    /* .col{
         flex-basis: 25px;
         padding-left: 10%;
     }
@@ -264,7 +269,7 @@ footer{
     }
     .col:nth-child(2) .col:nth-child(3){
         flex-basis: 15%;
-    }
+    } */
     img .src{
         width: 80px;
         margin-bottom: 30px;
@@ -318,7 +323,7 @@ footer{
         border-radius: 50px;
         text-align: center;
         line-height: 40px;
-        font-size: 20px;
+        font-size: 50px;
         color: #000;
         background: #fff;
         margin-right: 15px;
