@@ -217,7 +217,7 @@
   
     function updateFavoritesNav() {
         const favoritesNav = document.getElementById('favorites');
-        favoritesNav.textContent = `Favorites (${favorites.length})`;
+        favoritesNav.textContent = `FAVORITES (${favorites.length})`;
     }
   
     function saveFavoritesToLocalStorage() {
