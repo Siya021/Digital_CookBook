@@ -230,23 +230,42 @@
     });
 
 
-function mysort(recipes){
-    const difficultyOrder = ['easy','medium','hard']
+function mysort(dlevel){
 
-    recipes.sort((a,b)=>{
-        const difficultyA= difficultyOrder.indexOf(a.diffficulty);
-        const difficultyB= difficultyOrder.indexOf(b.diffficulty);
+    console.log(dlevel)
+
+    const difficultyOrder = ["none","easy","medium","hard"]
+
+    const selectedDifficultyIndex = difficultyOrder.indexOf(dlevel.toLowerCase());
+
+    console.log(allRecipes)
+    
+    let res = allRecipes.sort((a,b)=>{
+        const difficultyA = difficultyOrder.indexOf(a.difficulty.toLowerCase());
+        const difficultyB = difficultyOrder.indexOf(b.difficulty.toLowerCase());
+
+        if(difficultyA === 0 || difficultyA === selectedDifficultyIndex){
+            return -1;
+        }else if (difficultyB === 0 || difficultyB === selectedDifficultyIndex){
+            return 1;
+        }else {
         return difficultyA - difficultyB;
+    }
     })
-    console.log(recipes)
-    displayRecipes(recipes);
+    console.log(res)
+    displayRecipes(res);
 }
+
 const sortDropdown = document.getElementById('difficulty');
 sortDropdown.addEventListener('change',function(){
     const selectedDifficulty = sortDropdown.ariaValueMax;
-    const sortedRecipes = recipes.filter(recipe => recipe.difficulty === selectedDifficulty)
-    mysort(sortedRecipes);
-    console.log(sortedRecipes)
+    let dvalue  = sortDropdown.value
+    
+    
+
+    const sortedRecipes = allRecipes.filter(recipe => recipe.difficulty === selectedDifficulty)
+    mysort(dvalue);
+    console.log("All sorted",sortedRecipes)
 })
 
 function filterRecipesByMealType(recipes, mealType){
@@ -269,7 +288,6 @@ document.addEventListener("DOMContentLoaded", function(){
             console.log(allRecipes)
             const filteredRecipes = filterRecipesByMealType(allRecipes, selectedMealType);
     
-            console.log(filteredRecipes);
             displayRecipes(filteredRecipes)
         })
     })
