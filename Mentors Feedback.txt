@@ -1,1 +1,19 @@
 ## DON'T NOT TOUCH ##
+
+**********************
+** Sfiso's Feedback **
+**********************
+
+17/04/2023 10:28
+
+Good morning Group C.
+
+_Code & Project Review
+Good job on User Interface, there's an empty space on the last row of your items, that i believe you guys are fixing. You guys have applied the correct Naming Conversions to variables. Your code is clear and easy to read.
+
+Suggestion:
+There's an extra opening body tag in the index.html file that should be removed, and an empty unused H1 tag 
+
+Suggestion#2: refrain from using magic strings which is a "direct usage of a String in the code", e.g in the fetch(), it would be better to declare a variable called URL and instantiate it with the url link then add it as a parameter in the fetch, rather than fetch("abcc").
+
+Suggestion #1: Refrain from declaring functions inside of function especially if you are not using it in anyway inside of the parent function, rather have it outside so that it becomes reusable in other places in your code. 
